@@ -7,9 +7,10 @@
     <ul>
         {% for section in sections %}
         <li>
-            <span> {{ section['iid'] }} <a href="{{ section['url'] }}"> {{ section['name']  }} </a> </span>
+            <span>  <a href="{{ section['url'] }}"> {{ section['name']  }} </a> </span>
         </li>
         {% endfor %}
+        <li><a href="/mh/update/{{mh_name}}">===更新目录===</a></li>
     </ul>
 
 </body>

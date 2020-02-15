@@ -15,18 +15,21 @@ def index():
 
 
 mh = {
-    "斗破苍穹": {}
+    "斗破苍穹": {},
+    "三眼啸天录":{},
+    "萌三国":{}
 }
 
 
 @app.route("/mh/<string:mh_name>")
 def mh_toc(mh_name):
-    if mh_name == "斗破苍穹":
+    if mh_name in mh:
         if "sections" not in mh[mh_name]:
             do_mh_update(mh_name)
         sections=mh[mh_name]["sections"]
-        return render_template("mh_toc.html", title="斗破苍穹", sections=sections)
-
+        return render_template("mh_toc.html", title=mh_name, mh_name=mh_name,sections=sections)
+    else:
+        return "未找到",404
 
 @app.route("/mh/<string:mh_name>/<int:mh_section>")
 def mh_content(mh_name, mh_section):
@@ -44,8 +47,13 @@ def mh_content(mh_name, mh_section):
 
 
 def do_mh_update(mh_name):
-    if mh_name=="斗破苍穹":
-        dpcq_src_url="https://www.kaimanhua.com/api/getComicInfoBody?product_id=14&productname=kaimh&platformname=pc&comic_id=25934"
+    kai_id={
+        "斗破苍穹":"25934",
+        "三眼啸天录":"8458",
+        "萌三国":"8255",
+        }
+    if mh_name in kai_id:
+        dpcq_src_url=f"https://www.kaimanhua.com/api/getComicInfoBody?product_id=14&productname=kaimh&platformname=pc&comic_id={kai_id[mh_name]}"
         req= requests.get(dpcq_src_url)
         with open("db/dpcq_src.json","wb") as fp:
             fp.write(req.content)
@@ -63,12 +71,12 @@ def do_mh_update(mh_name):
             new_section={
                 "iid": f"{i}", 
                 "name": f"{chapter['chapter_name']}", 
-                "url": f"/mh/斗破苍穹/{i}", 
+                "url": f"/mh/{mh_name}/{i}", 
                 "img_urls":[img_ptn.format(img_id=img_id) for img_id in range(chapter["start_num"],chapter["end_num"]+1)]
                 }
             sections.append(new_section)
 
-        mh["斗破苍穹"]["sections"]=sections
+        mh[mh_name]["sections"]=sections
         #  = [
         #                         for i in range(1, 826)]
 
@@ -77,5 +85,5 @@ def mh_update(mh_name):
     do_mh_update(mh_name)
     return "ok"
 
-if __name__ == "__main__":
-    do_mh_update("斗破苍穹")
+# if __name__ == "__main__":
+#     do_mh_update("斗破苍穹")
