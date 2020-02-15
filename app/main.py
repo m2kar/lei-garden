@@ -34,10 +34,11 @@ def mh_content(mh_name, mh_section):
         do_mh_update(mh_name)
 
     sections=mh[mh_name]["sections"]
-    for section in sections:
+    for i,section in enumerate(sections):
         if int(section["iid"]) == mh_section:
             break
-    return render_template("mh_section.html",mh_name=mh_name,section_name=section["name"],nxt_url=f"/mh/{mh_name}/{mh_section+1}",nxt_name=f"下一章：第{mh_section+1}章",section_id=mh_section,**section)
+    nxt_section=sections[i+1]
+    return render_template("mh_section.html",mh_name=mh_name,section_name=section["name"],nxt_url=f"/mh/{mh_name}/{mh_section+1}",nxt_name=f"下一章: {nxt_section['name']}",section_id=mh_section,**section)
 
 # def mh_update()
 
