@@ -1,0 +1,13 @@
+<head>
+    <title> {{section_name }} - {{ mh_name }} </title>
+    
+</head>
+<body>
+<div style="width: 100%;">
+{% for img_id in range(1,img_count+1) %}
+<img width="auto" src="https://mhpic.jumanhua.com/comic/D/斗破苍穹拆分版/{{section_id}}话/{{img_id}}.jpg-kaimh.high.webp">
+{% endfor%}
+</div>
+
+<h3 style="text-align: center"><a href="{{nxt_url}}"> {{nxt_name}}</a></h3>
+</body>

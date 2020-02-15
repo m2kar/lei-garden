@@ -1,0 +1,15 @@
+<head>
+    <title>{{ title }} - 蕾蕾的秘密花园</title>
+</head>
+
+<body>
+    <h1>{{ title }} - 蕾蕾的秘密花园</h1>
+    <ul>
+        {% for section in sections %}
+        <li>
+            <span> {{ section['iid'] }} <a href="{{ section['url'] }}"> {{ section['name']  }} </a> </span>
+        </li>
+        {% endfor %}
+    </ul>
+
+</body>
