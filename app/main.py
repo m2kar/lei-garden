@@ -61,10 +61,10 @@ def do_mh_update(mh_name):
         "萌三国":"8255",
         }
     if mh_name in kai_id:
-        dpcq_src_url=f"https://www.kaimanhua.com/api/getComicInfoBody?product_id=14&productname=kaimh&platformname=pc&comic_id={kai_id[mh_name]}"
-        req= requests.get(dpcq_src_url)
-        with open("db/dpcq_src.json","wb") as fp:
-            fp.write(req.content)
+        src_url=f"https://www.kaimanhua.com/api/getComicInfoBody?product_id=14&productname=kaimh&platformname=pc&comic_id={kai_id[mh_name]}"
+        req= requests.get(src_url)
+        # with open("db/dpcq_src.json","wb") as fp:
+        #     fp.write(req.content)
         # mh["斗破苍穹"]
 
         # with open("db/dpcq_src.json") as fp:
