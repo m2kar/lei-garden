@@ -8,17 +8,18 @@ app = Flask(
 )
 
 
-@app.route("/")
-def index():
-    do_mh_update("斗破苍穹")
-    return render_template("index.html")
-
-
 mh = {
     "斗破苍穹": {},
     "三眼啸天录":{},
-    "萌三国":{}
+    "萌三国":{},
+    "三眼啸天录-天神归位":{}
 }
+
+@app.route("/")
+def index():
+    do_mh_update("斗破苍穹")
+    return render_template("index.html",mh=mh)
+
 
 
 @app.route("/mh/<string:mh_name>")
@@ -57,8 +58,9 @@ def mh_content(mh_name, mh_section):
 def do_mh_update(mh_name):
     kai_id={
         "斗破苍穹":"25934",
-        "三眼啸天录":"8458",
         "萌三国":"8255",
+        "三眼啸天录":"8458",
+        "三眼啸天录-天神归位":"107660"
         }
     if mh_name in kai_id:
         src_url=f"https://www.kaimanhua.com/api/getComicInfoBody?product_id=14&productname=kaimh&platformname=pc&comic_id={kai_id[mh_name]}"
@@ -93,5 +95,3 @@ def mh_update(mh_name):
     do_mh_update(mh_name)
     return "ok"
 
-# if __name__ == "__main__":
-#     do_mh_update("斗破苍穹")
