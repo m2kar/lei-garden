@@ -40,8 +40,16 @@ def mh_content(mh_name, mh_section):
     for i,section in enumerate(sections):
         if int(section["iid"]) == mh_section:
             break
-    nxt_section=sections[i+1]
-    return render_template("mh_section.html",mh_name=mh_name,section_name=section["name"],nxt_url=f"/mh/{mh_name}/{mh_section+1}",nxt_name=f"下一章: {nxt_section['name']}",section_id=mh_section,**section)
+    if i>=len(sections)-1:
+        nxt_section= {
+                "iid": "0", 
+                "name": f"已读完?点击更新章节", 
+                "url": f"/mh/update/{mh_name}", 
+                # "img_urls":[img_ptn.format(img_id=img_id) for img_id in range(chapter["start_num"],chapter["end_num"]+1)]
+                }
+    else:
+        nxt_section=sections[i+1]
+    return render_template("mh_section.html",mh_name=mh_name,section_name=section["name"],nxt_url=nxt_section['url'],nxt_name=f"下一章: {nxt_section['name']}",section_id=mh_section,**section)
 
 # def mh_update()
 
