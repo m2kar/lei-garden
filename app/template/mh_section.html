@@ -14,25 +14,25 @@
 </head>
 
 <body>
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">蕾蕾的秘密花园</a></li>
-    <li class="breadcrumb-item"><a href="/mh/{{mh_name}}">{{mh_name}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{section_name }}</li>
-  </ol>
-</nav>
     <div class="container text-center">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">蕾蕾的秘密花园</a></li>
+                <li class="breadcrumb-item"><a href="/mh/{{mh_name}}">{{mh_name}}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{section_name }}</li>
+            </ol>
+        </nav>
 
         <!-- <h1 ><a  href="/mh/{{ mh_name }}">目录： {{mh_name}}</a></h3> -->
-            <h1 class="title">{{section_name }} - {{ mh_name }} </h2>
-                <div class="content">
-                    {% for img_url in img_urls %}
-                    <div class="col-md-12">
-                        <img class="w-auto"  src="{{img_url}}">
-                    </div>
-                    {% endfor%}
-                </div>
+        <h1 class="title">{{section_name }} - {{ mh_name }} </h2>
+            <!-- <div class="content"> -->
+                {% for img_url in img_urls %}
+                <!-- <div class="col-md-12"> -->
+                    <img class="img-fluid" src="{{img_url}}">
+                <!-- </div> -->
+                {% endfor%}
+            <!-- </div> -->
 
-                <h1 ><a class="badge badge-secondary" href="{{ nxt_url }}"> {{nxt_name}}</a></h3>
+            <h1><a class="badge badge-secondary" href="{{ nxt_url }}"> {{nxt_name}}</a></h3>
     </div>
 </body>
